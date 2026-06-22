@@ -26,8 +26,22 @@ Document at least 3 bugs you found. Add rows as needed.
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
+I used two AI tools on this project: Claude chat— for planning/understanding bugs, and Claude Code in VS Code— for proposing the actual fixes.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+One AI suggestion that was correct: when I fixed the scoring bug, I asked Claude Code to: "In app.py, the update_score function (marked with a FIXME) has broken scoring. I want to replace the logic with these rules: a wrong guess — whether "Too High" or "Too Low" — subtracts 5 points, and the score must never go below 0 (floor at 0). On a "Win", return the score unchanged. Please rewrite update_score to do exactly this and nothing more. Separately, the score is initialized to 0 in session_state — I want it to start at 100 instead". It suggested: "def update_score(current_score: int, outcome: str, attempt_number: int):
+    if outcome == "Win":
+        return current_score
+
+    if outcome == "Too High" or outcome == "Too Low":
+        return max(0, current_score - 5)
+
+    return current_score
+And the session_state score initialization change (around line 99-100):
+
+if "score" not in st.session_state:
+    st.session_state.score = 100". I verified it by tracing the math by hand: 100→95→90, checking 0 stays at 0, then confirming it live in the running game.
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+Honestly I didn't get one. I think that's because of how I worked: specific prompts, and only one bug per chat. Most importantly, instead of auto-applying the AI's code, I asked to view it first, reviewed it myself, then pasted it in manually. So even during the riskiest change— the refactor, where the AI could have silently rewritten my fixed functions — I checked the diff/code to confirm my hint and score fixes survived.
 
 ---
 
