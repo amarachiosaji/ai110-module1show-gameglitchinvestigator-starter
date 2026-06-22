@@ -1,7 +1,7 @@
 import random
 import streamlit as st
 
-def get_range_for_difficulty(difficulty: str):
+def get_range_for_difficulty(difficulty: str): # FIX ME: The ranges for the difficulty levels are not consistent. Easy has a range of 1-20, Normal has a range of 1-100, and Hard has a range of 1-50. This is counterintuitive and may be a glitch in the game design.
     if difficulty == "Easy":
         return 1, 20
     if difficulty == "Normal":
@@ -29,40 +29,33 @@ def parse_guess(raw: str):
     return True, value, None
 
 
-def check_guess(guess, secret):
+def check_guess(guess, secret): 
     if guess == secret:
         return "Win", "🎉 Correct!"
 
     try:
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
             return "Win", "🎉 Correct!"
         if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
-        if points < 10:
-            points = 10
-        return current_score + points
+        return current_score
 
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
-
-    if outcome == "Too Low":
-        return current_score - 5
+    if outcome == "Too High" or outcome == "Too Low":
+        return max(0, current_score - 5)
 
     return current_score
+
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
@@ -81,7 +74,7 @@ attempt_limit_map = {
     "Easy": 6,
     "Normal": 8,
     "Hard": 5,
-}
+} # FIX ME: The attempt limits are not consistent with the difficulty levels. Normal has more attempts than Easy, and Hard has fewer attempts than Easy. This is counterintuitive and may be a glitch in the game design.
 attempt_limit = attempt_limit_map[difficulty]
 
 low, high = get_range_for_difficulty(difficulty)
@@ -96,7 +89,8 @@ if "attempts" not in st.session_state:
     st.session_state.attempts = 1
 
 if "score" not in st.session_state:
-    st.session_state.score = 0
+    st.session_state.score = 100
+
 
 if "status" not in st.session_state:
     st.session_state.status = "playing"
