@@ -59,7 +59,7 @@ AI helped me realize check_guess returns a tuple (outcome, message), so the test
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
-Streamlit is like a page that completely rebuilds itself on every single interaction of the user. 
+Streamlit is like a board or page that completely rebuilds itself on every single interaction of the user. Reruns are like the board wiping and redrawing, while session state is the sticky notes that survive the wipe.
 
 ---
 
@@ -67,5 +67,8 @@ Streamlit is like a page that completely rebuilds itself on every single interac
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+One habit I want to reuse in the future is always viewing and reviewing AI-suggested code before applying it, rather than auto-accepting, because that way I'm able to properly view the code and be accountable ensuring the bugs have been fixed and there is actual correct logic in the code.
 - What is one thing you would do differently next time you work with AI on a coding task?
+One thing I'd do differently is read through the code files before playing, or commit even more frequently.
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+Genuinely the app looked polished and "production-ready" but was full of hidden bugs, so now I treat AI-generated code as a draft to verify, not a finished product to trust
