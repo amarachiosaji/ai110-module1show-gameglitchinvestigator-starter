@@ -48,9 +48,11 @@ Honestly I didn't get one. I think that's because of how I worked: specific prom
 ## 3. Debugging and testing your fixes
 
 - How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
+How I decided a bug was really fixed: I used two layers of checking. First, I verified it live in the running game- e.g., for the hint bug I guessed a number I knew was too high and confirmed it now says "Go LOWER"; for the score I watched it count 100→95→90 and stop at 0. Then I locked it in with an automated pytest test so I wouldn't have to manually re-check every time.
+- Describe at least one test you ran (manual or using pytest) and what it showed you about your code.
+A test I ran: I ran `python -m pytest` and got the result — 5 passed. For example, test_guess_too_high checks that guessing 60 against a secret of 50 returns "Too High" AND that the message contains "LOWER", which proves my hint fix works.
 - Did AI help you design or understand any tests? How?
+AI helped me realize check_guess returns a tuple (outcome, message), so the tests had to unpack both values instead of comparing to a single string; it also helped me design assertions that specifically target my two fixes.
 
 ---
 
