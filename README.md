@@ -25,9 +25,9 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- Describe the game's purpose.[A number guessing game where the player guesses a secret number between a range, getting higher/lower hints until they win or run out of attempts]
-- Detail which bugs you found.[Reversed hints, negative/fluctuating score, scrambled difficulty tiers]
-- Explain what fixes you applied.[Corrected the swapped hint messages in check_guess; rewrote update_score to subtract 5 per wrong guess floored at 0, starting score at 100; refactored logic into logic_utils.py]
+- Describe the game's purpose: A number guessing game where the player guesses a secret number between a range, getting higher/lower hints until they win or run out of attempts
+- Detail which bugs you found: Reversed hints, negative/fluctuating score, scrambled difficulty tiers
+- Explain what fixes you applied: Corrected the swapped hint messages in check_guess; rewrote update_score to subtract 5 per wrong guess floored at 0, starting score at 100; refactored logic into logic_utils.py
 
 ## 📸 Demo Walkthrough
 
