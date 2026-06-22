@@ -59,6 +59,7 @@ AI helped me realize check_guess returns a tuple (outcome, message), so the test
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+Streamlit is like a page that completely rebuilds itself on every single interaction of the user. 
 
 ---
 
